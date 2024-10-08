@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-import home, movie_recommender, detection, contact
+import home, movie_recommender, detection, contact, gaze_tracking
 
 st.set_page_config(
         page_title="ML Website",
@@ -44,10 +44,10 @@ class MultiApp:
         with st.sidebar:        
             app = option_menu(
                 menu_title='Machine Learning ',
-                options=['Home','Movie Recommender', 'Detection','Contact'],
-                icons=['house-fill','film','person-circle','telephone'],
+                options=['Home', 'Gaze Tracking','Movie Recommender', 'Detection','Contact'],
+                icons=['house-fill','eye', 'film','person-circle','telephone'],
                 menu_icon='robot',
-                default_index=1,
+                default_index=0,
                 styles={
                         "container": {"padding": "5!important","background-color":'black'},
                         "icon"     : {"color": "white", "font-size": "17px"}, 
@@ -60,6 +60,8 @@ class MultiApp:
         
         if app == "Home":
             home.app()
+        if app == "Gaze Tracking":
+            gaze_tracking.app()
         if app == "Detection":
             detection.app()    
         if app == "Contact":
