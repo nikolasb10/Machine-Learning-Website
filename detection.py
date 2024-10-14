@@ -32,7 +32,7 @@ def app():
                     img.save(temp_file_name)  # Save the image in the temp file
 
                 # Detect the humans in the image and display the final image
-                result_img_rgb = detect_humans(temp_file_name)
+                result_img_rgb, _ = detect_humans(temp_file_name)
                 st.image(result_img_rgb, caption="Human Detection Results", use_column_width=True)
 
         # If user selects to choose from existing images
@@ -59,7 +59,7 @@ def app():
 
                 if selected_image != "Select an image...":
                     image_path = image_files[selected_image]
-                    result_img_rgb = detect_humans(image_path)
+                    result_img_rgb, _ = detect_humans(image_path)
                     # Display the image with human detections in RGB format
                     st.image(result_img_rgb, caption="Human Detection Results", use_column_width=True)
 
