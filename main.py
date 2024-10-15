@@ -45,7 +45,7 @@ class MultiApp:
         with st.sidebar:        
             app = option_menu(
                 menu_title='Machine Learning ',
-                options=['Home', 'Image Classification', 'Gaze Tracking','Movie Recommender', 'Detection','Contact'],
+                options=['Home', 'Gaze Tracking','Movie Recommender', 'Detection', 'Image Classification','Contact'],
                 icons=['house-fill', 'camera2', 'eye', 'film','person-circle','telephone'],
                 menu_icon='robot',
                 default_index=0,

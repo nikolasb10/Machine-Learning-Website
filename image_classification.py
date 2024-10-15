@@ -61,7 +61,6 @@ def app():
                         """)
 
         with st.expander("🎯 Test the predictor"):
-            model = initialize_animal_predictor_model()    
             image_options = ["Select an image..."] + image_names
             selected_image = st.selectbox("Select an image by name:", image_options)
 
@@ -70,6 +69,7 @@ def app():
                 st.write(f"Selected Image: {selected_image}")
                 selected_image_path = f"./image_classification_utils/sample_images/{selected_image}"
                 st.image(selected_image_path)
+                model = initialize_animal_predictor_model()    
 
                 if model:
                     animal_predictor(model, selected_image_path)

@@ -17,7 +17,7 @@ def app():
         st.write("Choose how you'd like to provide the image for detection.")
 
         # Radio button for image source selection
-        option = st.radio("Select Image Source:", ["Upload your own image", "Choose an existing image"])
+        option = st.radio("Select Image Source:", ["Choose an existing image", "Upload your own image"])
 
         # If user selects to upload their own image
         if option == "Upload your own image":
