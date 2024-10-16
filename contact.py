@@ -1,32 +1,30 @@
-import streamlit as st
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
 import os
-from dotenv import load_dotenv
-
-# Load environment variables from the .env file
-load_dotenv()
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+import streamlit as st  # Import Streamlit to access secrets
 
 def send_email(contact_email, contact_name, message):
-    # Email settings
-    sender_email = os.getenv('SENDER_EMAIL')  # Your email address
-    sender_password = os.getenv('SENDER_PASSWORD')  # Your email password (use App Password if using Gmail 2FA)
-    receiver_email = os.getenv('RECEIVER_EMAIL')  # The email address where you want to receive the messages
-    print(sender_email,sender_password,receiver_email)
+    # Access secrets from Streamlit's secrets management
+    sender_email = st.secrets["smtp"]["SENDER_EMAIL"]
+    sender_password = st.secrets["smtp"]["SENDER_PASSWORD"]
+    receiver_email = st.secrets["smtp"]["RECEIVER_EMAIL"]
+
+    print(sender_email, sender_password, receiver_email)
+    
     # Create email
     subject = f"New message from {contact_name}"
     body = f"Name: {contact_name}\nEmail: {contact_email}\n\nMessage:\n{message}"
-    
+
     # Set up the email details
     msg = MIMEMultipart()
     msg['From'] = sender_email
     msg['To'] = receiver_email
     msg['Subject'] = subject
     msg.attach(MIMEText(body, 'plain'))
-    print(msg)
-    # Connect to Gmail's SMTP server
+
     try:
+        # Connect to Gmail's SMTP server
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()  # Start TLS encryption
         server.login(sender_email, sender_password)  # Login to the email account
