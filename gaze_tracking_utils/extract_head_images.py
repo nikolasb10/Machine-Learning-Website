@@ -75,6 +75,7 @@ def extract_head_images(frame_batch):
             folder_path = f"./gaze_tracking_utils/video_frames/human_{idx_human}"
             if not os.path.exists(folder_path):
                 os.makedirs(folder_path)
+                
             save_path = f"{folder_path}/frame_{idx_frame}.jpg"
             cropped_head.save(save_path, "JPEG")
 
