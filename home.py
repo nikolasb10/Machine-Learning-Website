@@ -42,6 +42,7 @@ def app():
                         - **Hard Skills**: Python, Java, C, C++, HTML/CSS, Node + React JavaScript, SQL, Streamlit, Flutter                        
                         """)
             st.download_button(label="📄 Download Resume", data=resume, file_name="Benetos_Resume.pdf",mime="application/octet-stream")
+ 
     st.write("---")
             
     with st.container():

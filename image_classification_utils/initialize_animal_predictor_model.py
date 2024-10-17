@@ -13,9 +13,11 @@ def initialize_animal_predictor_model():
     model_url = 'https://drive.google.com/uc?id=12e9z8EIC1RrOPdnwEoj8Sw3RDWPj9C1i'
 
     # Check if the folder contains any files or subdirectories
-    if len(os.listdir(folder_path)) == 0:
+    folder_content = [f for f in os.listdir(folder_path) if f != '.gitkeep']
+    if len(folder_content) == 0:
         # Folder is empty start downloading weights
-        gdown.download(model_url, model_path, quiet=False)
+        with st.spinner('Loading the predictor...'):
+            gdown.download(model_url, model_path, quiet=False)
     else:
         # Folder not empty check if it has finished downloading (if path exists)
         if not os.path.exists(model_path):

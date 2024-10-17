@@ -1,5 +1,6 @@
 import cv2
 import streamlit as st
+import os
 
 def draw_gaze_direction(output_gazes, gaze_start_coords_dict, frame_batch, counter):
     """
@@ -34,7 +35,10 @@ def draw_gaze_direction(output_gazes, gaze_start_coords_dict, frame_batch, count
         # st.image(frame, caption="Head Detection Results", use_column_width=True)
                 
         # Save the frame as an image
-        frame_save_path = f"./gaze_tracking_utils/video_frames/final_frames/frame_{counter+frame_index}.jpg"
+        folder_path = f"./gaze_tracking_utils/video_frames/final_frames"
+        if not os.path.exists(folder_path):
+            os.makedirs(folder_path)
+        frame_save_path = f"{folder_path}/frame_{counter+frame_index}.jpg"
         cv2.imwrite(frame_save_path, frame)
 
                 

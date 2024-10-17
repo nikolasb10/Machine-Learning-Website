@@ -72,7 +72,10 @@ def extract_head_images(frame_batch):
             cropped_head, gaze_start_coords = crop_head_and_find_gaze_start_coords(cropped_image, x1, y1)
 
             # Save cropped_head
-            save_path = f"./gaze_tracking_utils/video_frames/human_{idx_human}/frame_{idx_frame}.jpg"
+            folder_path = f"./gaze_tracking_utils/video_frames/human_{idx_human}"
+            if not os.path.exists(folder_path):
+                os.makedirs(folder_path)
+            save_path = f"{folder_path}/frame_{idx_frame}.jpg"
             cropped_head.save(save_path, "JPEG")
 
             # Save gaze start coords
