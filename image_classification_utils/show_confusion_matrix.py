@@ -91,6 +91,7 @@ import pandas as pd
 import plotly.figure_factory as ff
 from sklearn.metrics import confusion_matrix
 
+@st.cache_data
 def show_confusion_matrix():
     class_names = ["Elefante", "Farfalla", "Mucca", "Pecora", "Scoiattolo"]
 

@@ -19,6 +19,7 @@ def modify_state_dict(state_dict):
             new_state_dict[k] = v
     return new_state_dict
 
+@st.cache_data
 # Add frames of a video in its folder starting and ending on a specific frame
 def create_video_with_gaze_directions(output_dir, video_path, start_frame=0, end_frame=1, progress=True):
     # Open the video file

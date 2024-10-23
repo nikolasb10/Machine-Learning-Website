@@ -46,7 +46,7 @@ class MultiApp:
             app = option_menu(
                 menu_title='Machine Learning ',
                 options=['Home', 'Gaze Tracking','Movie Recommender', 'Detection', 'Image Classification','Contact'],
-                icons=['house-fill', 'camera2', 'eye', 'film','person-circle','telephone'],
+                icons=['house-fill', 'eye', 'film','person-circle', 'camera2','telephone'],
                 menu_icon='robot',
                 default_index=0,
                 styles={

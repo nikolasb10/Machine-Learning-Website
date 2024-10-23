@@ -1,0 +1,7 @@
+path: C:\Users\Nikolas\Desktop\Machine-Learning-Website\detector_utils\train_own_detector\own_detector_dataset
+train: images/train
+val: images/val
+
+# Classes
+names:
+  0: desired object

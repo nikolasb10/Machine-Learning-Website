@@ -8,6 +8,7 @@ import streamlit as st
 from bokeh.embed import components
 import pandas as pd 
 
+@st.cache_data
 def ROC_curves(true_labels, predicted_labels, classes):
     # Assume you already have true_labels and predicted_labels
     n_classes = len(classes)

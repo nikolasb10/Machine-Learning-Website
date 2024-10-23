@@ -3,6 +3,7 @@ import pandas as pd
 import streamlit as st
 import plotly.graph_objs as go
 
+@st.cache_data
 def PCA_reduction():
     # Read the CSV file
     df = pd.read_csv('./image_classification_utils/labels_for_features.csv')

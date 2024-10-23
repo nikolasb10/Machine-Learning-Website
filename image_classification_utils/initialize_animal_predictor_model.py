@@ -4,6 +4,7 @@ import torch
 import os
 import streamlit as st
 
+@st.cache_resource
 def initialize_animal_predictor_model():
     # Define the path where the model will be stored locally
     model_path = './image_classification_utils/model_weights/AlexNet_best_weights.pth'

@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 from streamlit_lottie import st_lottie
+from general_utils.custom_write import custom_write
 
 def load_lottie_url(url):
     r = requests.get(url)
@@ -11,15 +12,7 @@ def load_lottie_url(url):
 
 def app():
     st.title("Machine Learning Website")
-    st.markdown(
-                    """
-                    <h1 style='font-size:25px;'>
-                        Welcome to Nikolaos Benetos' Machine Learning Hub!
-                    </h1>
-                    """,
-                    unsafe_allow_html=True
-                )
-
+    custom_write("Welcome to Nikolaos Benetos' Machine Learning Hub!",25)
     st.write("---")
 
     lottie_animation = load_lottie_url("https://lottie.host/b6f3a7a3-b91e-49d0-9368-931082f489ff/vCgGLoQyzt.json")
