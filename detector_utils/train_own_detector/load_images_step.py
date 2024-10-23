@@ -66,7 +66,7 @@ def load_images_step():
         # Loop through images and display each one in its column
         for idx, image_name in enumerate(image_names[:number_of_images]):
             with cols[idx]:
-                image_path = os.path.join(images_folder, image_name)
+                image_path = f"/home/appuser/.cache/kagglehub/datasets/yinchuangsum/person-wheel-chair-not-wheel-chair/versions/1/valid/images/{image_name}"
                 st.image(image_path, use_column_width=True)  
 
     if st.session_state.dataset_saved:
