@@ -1,6 +1,5 @@
 import streamlit as st
 from general_utils.custom_write import custom_write
-from streamlit_drawable_canvas import st_canvas
 import streamlit as st
 from detector_utils.train_own_detector.annotate_step import annotate_step
 from detector_utils.train_own_detector.create_dataset_step import create_dataset_step
