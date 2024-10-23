@@ -51,7 +51,7 @@ def load_images_step():
                 """)
     
     images_folder = load_kaggle_dataset()
-
+    images_folder = "/home/appuser/.cache/kagglehub/datasets/yinchuangsum/person-wheel-chair-not-wheel-chair/versions/1/valid/images"
     # st.link_button("View annotated dataset")
     with st.expander("View example images for wheel chair dataset"):
         image_names = []
@@ -66,7 +66,7 @@ def load_images_step():
         # Loop through images and display each one in its column
         for idx, image_name in enumerate(image_names[:number_of_images]):
             with cols[idx]:
-                image_path = f"/home/appuser/.cache/kagglehub/datasets/yinchuangsum/person-wheel-chair-not-wheel-chair/versions/1/valid/images/{image_name}"
+                image_path = f"{images_folder}/{image_name}"
                 st.image(image_path, use_column_width=True)  
 
     if st.session_state.dataset_saved:
@@ -76,7 +76,6 @@ def load_images_step():
         # st.button("Save dataset", on_click=save_dataset)
 
         # Button to use the wheelchair dataset images
-        print(images_folder)
         st.button("Use wheel chair dataset", on_click=use_wheelchair_dataset, args=(images_folder,))
         st.write("or use the wheel chair dataset!")
 
