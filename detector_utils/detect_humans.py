@@ -1,5 +1,5 @@
-from ultralytics import YOLO
 import cv2
+from ultralytics import YOLO
 
 def detect_humans(image_path):
     model = YOLO("./detector_utils/yolo11n.pt")
