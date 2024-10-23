@@ -1,9 +1,3 @@
 .env
 # Ignore compiled bytecode
 *.pyc
-__pycache__/
-detector_utils/mlflow_logs/
-image_classification_utils/model_weights/AlexNet_best_weights.pth
-gaze_tracking_utils/video_frames/human_0/
-gaze_tracking_utils/video_frames/final_frames/
-gaze_tracking_utils/video_frames/human_1/
