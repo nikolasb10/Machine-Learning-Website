@@ -19,7 +19,7 @@ def train_step():
 
         if st.session_state.demo_dataset_loaded:
             custom_write("With the wheelchair dataset you can test an already trained model (for 20 epochs) if you like!",20)
-            model_path = './detector_utils/train_own_detector/own_detector_training_results\wheelchair_trained_model_weights.pt'
+            model_path = './detector_utils/train_own_detector/own_detector_training_results/wheelchair_trained_model_weights.pt'
             model      = YOLO(model_path)    
             test_model(model)
             custom_write("Else you can train it again!",20)
