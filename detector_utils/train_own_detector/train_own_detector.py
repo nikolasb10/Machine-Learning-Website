@@ -6,24 +6,6 @@ from detector_utils.train_own_detector.create_dataset_step import create_dataset
 from detector_utils.train_own_detector.load_images_step import load_images_step
 from detector_utils.train_own_detector.train_step import train_step
 
-# Initialize session states
-if 'current_step' not in st.session_state:
-    st.session_state.current_step = 1  # Start at step 1
-if 'image_index' not in st.session_state:
-    st.session_state.image_index = 0
-if 'bounding_boxes' not in st.session_state:
-    st.session_state.bounding_boxes = []
-if 'yolo_bounding_boxes' not in st.session_state:
-    st.session_state.yolo_bounding_boxes = []
-if 'uploaded_files' not in st.session_state:
-    st.session_state.uploaded_files = []
-if 'dataset_saved' not in st.session_state:
-    st.session_state.dataset_saved  = False
-if 'demo_dataset_loaded' not in st.session_state:
-    st.session_state.demo_dataset_loaded = False
-if 'own_detector_trained' not in st.session_state:
-    st.session_state.own_detector_trained = False
-
 # Define the total number of steps
 total_steps = 4
 
@@ -52,6 +34,25 @@ def show_step(step):
         train_step()
 
 def train_own_detector():
+    
+    # Initialize session states
+    if 'current_step' not in st.session_state:
+        st.session_state.current_step = 1  # Start at step 1
+    if 'image_index' not in st.session_state:
+        st.session_state.image_index = 0
+    if 'bounding_boxes' not in st.session_state:
+        st.session_state.bounding_boxes = []
+    if 'yolo_bounding_boxes' not in st.session_state:
+        st.session_state.yolo_bounding_boxes = []
+    if 'uploaded_files' not in st.session_state:
+        st.session_state.uploaded_files = []
+    if 'dataset_saved' not in st.session_state:
+        st.session_state.dataset_saved  = False
+    if 'demo_dataset_loaded' not in st.session_state:
+        st.session_state.demo_dataset_loaded = False
+    if 'own_detector_trained' not in st.session_state:
+        st.session_state.own_detector_trained = False
+
     custom_write("In this page you can train your own object detection model!",25)
     custom_write("Follow the steps below to achieve this!",20)
 
