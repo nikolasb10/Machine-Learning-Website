@@ -51,6 +51,7 @@ def load_images_step():
                 """)
     
     images_folder = load_kaggle_dataset()
+    # for deployed version
     images_folder = "/home/appuser/.cache/kagglehub/datasets/yinchuangsum/person-wheel-chair-not-wheel-chair/versions/1/valid/images"
     # st.link_button("View annotated dataset")
     with st.expander("View example images for wheel chair dataset"):
