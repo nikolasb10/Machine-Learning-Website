@@ -80,9 +80,5 @@ def app():
 
     # Upload Image tab content
     with tabs[1]:
-        st.header("Upload Image")
-        st.write("Upload an image to detect objects.")
-        uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "png", "jpeg"])
-        if uploaded_file is not None:
-            st.image(uploaded_file, caption='Uploaded Image.', use_column_width=True)
-            st.write("Detecting objects...")
+        st.write("The code used to train different Vision Transformer models on a Brain Tumor Dataset can be found on: https://www.kaggle.com/code/nikolasbenetos/brain-tumor-classification")
+        
