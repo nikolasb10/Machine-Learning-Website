@@ -1,12 +1,11 @@
 import streamlit as st
-
 from streamlit_option_menu import option_menu
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
-import home, movie_recommender, detection, contact, gaze_tracking, image_classification
+import home, movie_recommender, detection, contact, gaze_tracking, image_classification, nlp_tools
 
 st.set_page_config(
         page_title="ML Website",
@@ -45,8 +44,8 @@ class MultiApp:
         with st.sidebar:        
             app = option_menu(
                 menu_title='Machine Learning ',
-                options=['Home', 'Gaze Tracking','Movie Recommender', 'Detection', 'Image Classification','Contact'],
-                icons=['house-fill', 'eye', 'film','person-circle', 'camera2','telephone'],
+                options=['Home', 'Gaze Tracking','Movie Recommender', 'Detection', 'Image Classification', 'NLP Tools','Contact'],
+                icons=['house-fill', 'eye', 'film','person-circle', 'camera2', 'card-text', 'telephone'],
                 menu_icon='robot',
                 default_index=0,
                 styles={
@@ -68,9 +67,11 @@ class MultiApp:
         if app == "Detection":
             detection.app()    
         if app == "Contact":
-            contact.app()  
+            contact.app()
         if app == "Movie Recommender":
-            movie_recommender.app()                  
+            movie_recommender.app()  
+        if app == "NLP Tools":
+            nlp_tools.app()                  
           
              
     run()            
