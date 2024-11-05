@@ -26,6 +26,9 @@ def app():
             mode=WebRtcMode.SENDRECV,
             video_processor_factory=HandRecognitionProcessor,
             media_stream_constraints={"video": True, "audio": False},
+            rtc_configuration={  # Add this config
+                "iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]
+            }
         )
 
     # Video Feed Tab
