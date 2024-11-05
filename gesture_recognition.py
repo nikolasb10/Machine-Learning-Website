@@ -3,6 +3,7 @@ from streamlit_webrtc import webrtc_streamer, WebRtcMode
 from gesture_recognition_utils.HandRecognitionProcessor import HandRecognitionProcessor
 from general_utils.custom_write import custom_write
 import platform 
+import os 
 
 def app():
     st.title("✋ Gesture Recognition")
@@ -19,6 +20,8 @@ def app():
 
         current_os = platform.system()
         st.write(f"Here {current_os}")
+        os.system(f"osascript -e 'set volume output volume 60'")
+        
         # Set up the webcam feed with the hand recognition processor
         webrtc_streamer(
             key="hand-recognition",
