@@ -16,13 +16,11 @@ mp_drawing = mp.solutions.drawing_utils
 class HandRecognitionProcessor(VideoProcessorBase):
     def __init__(self):
         # Initialize audio interface once
-        st.write(f"Here before")
         self.current_os = platform.system()
         self.volume_control = None
         self.volume = 40
         st.write(f"Here: {self.current_os}")
         if self.current_os == "Windows":
-            st.write("Here1")
             from ctypes import cast, POINTER
             import pythoncom
             from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
@@ -35,7 +33,6 @@ class HandRecognitionProcessor(VideoProcessorBase):
                           
     def set_system_volume(self, volume):
         # Set volume level (0.0 to 1.0)
-        st.write("system_volume")
         if self.current_os == "Windows":
             self.volume_control.SetMasterVolumeLevelScalar(volume / 100.0, None)
         elif self.current_os == "Darwin":  # macOS
@@ -50,13 +47,11 @@ class HandRecognitionProcessor(VideoProcessorBase):
         # Process the image and detect hands
         img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         results = hands.process(img_rgb)
-        st.write("Here2")
         
         # Draw hand landmarks and calculate distances if hands are detected
         if results.multi_hand_landmarks:
             for hand_landmarks in results.multi_hand_landmarks:
                 # Draw the landmarks on the image
-                st.write("Here3")
                 mp_drawing.draw_landmarks(
                     img, hand_landmarks, mp_hands.HAND_CONNECTIONS,
                     mp_drawing.DrawingSpec(color=(0, 255, 0), thickness=2, circle_radius=2),

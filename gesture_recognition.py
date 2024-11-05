@@ -17,19 +17,9 @@ def app():
 
         st.write("In this tab you can increase or decrease the system's volume by moving your thumb and index fingers as far as possible \
                      to increase and touching them to decrease. Put some music on to notice the differences better! (Works only on windows for now)")
+        
+        st.write("For now it doesn't work on the deployed app")
 
-        current_os = platform.system()
-        st.write(f"Here {current_os}")
-        from ctypes import cast, POINTER
-        import pythoncom
-        from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
-        from comtypes import CLSCTX_ALL
-        
-        pythoncom.CoInitialize()
-        devices = AudioUtilities.GetSpeakers()
-        interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
-        volume_control = cast(interface, POINTER(IAudioEndpointVolume))
-        
         # Set up the webcam feed with the hand recognition processor
         webrtc_streamer(
             key="hand-recognition",
