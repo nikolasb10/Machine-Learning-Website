@@ -20,7 +20,15 @@ def app():
 
         current_os = platform.system()
         st.write(f"Here {current_os}")
-        os.system(f"osascript -e 'set volume output volume 60'")
+        from ctypes import cast, POINTER
+        import pythoncom
+        from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
+        from comtypes import CLSCTX_ALL
+        
+        pythoncom.CoInitialize()
+        devices = AudioUtilities.GetSpeakers()
+        interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
+        volume_control = cast(interface, POINTER(IAudioEndpointVolume))
         
         # Set up the webcam feed with the hand recognition processor
         webrtc_streamer(
