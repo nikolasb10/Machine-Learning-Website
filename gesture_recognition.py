@@ -18,7 +18,7 @@ def app():
         st.write("In this tab you can increase or decrease the system's volume by moving your thumb and index fingers as far as possible \
                      to increase and touching them to decrease. Put some music on to notice the differences better! (Works only on windows for now)")
         
-        st.write("For now it doesn't work on the deployed app")
+        st.write("For now even though the detections are correct, we can't change the systems volume from the deployed app")
 
         # Set up the webcam feed with the hand recognition processor
         webrtc_streamer(
