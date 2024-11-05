@@ -18,8 +18,9 @@ class HandRecognitionProcessor(VideoProcessorBase):
         self.current_os = platform.system()
         self.volume_control = None
         self.volume = 40
-
+        print("Here")
         if self.current_os == "Windows":
+            print("Here1")
             from ctypes import cast, POINTER
             import pythoncom
             from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
@@ -46,11 +47,13 @@ class HandRecognitionProcessor(VideoProcessorBase):
         # Process the image and detect hands
         img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         results = hands.process(img_rgb)
+        print("Here2")
         
         # Draw hand landmarks and calculate distances if hands are detected
         if results.multi_hand_landmarks:
             for hand_landmarks in results.multi_hand_landmarks:
                 # Draw the landmarks on the image
+                print("Here3")
                 mp_drawing.draw_landmarks(
                     img, hand_landmarks, mp_hands.HAND_CONNECTIONS,
                     mp_drawing.DrawingSpec(color=(0, 255, 0), thickness=2, circle_radius=2),
