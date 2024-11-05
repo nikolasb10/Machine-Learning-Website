@@ -3,10 +3,8 @@ import av
 import cv2
 import mediapipe as mp
 import numpy as np
-from ctypes import cast, POINTER
-from comtypes import CLSCTX_ALL
-from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
-import pythoncom
+import os
+import platform
 
 # Mediapipe setup for hand recognition
 mp_hands = mp.solutions.hands
@@ -17,18 +15,29 @@ mp_drawing = mp.solutions.drawing_utils
 class HandRecognitionProcessor(VideoProcessorBase):
     def __init__(self):
         # Initialize audio interface once
-        pythoncom.CoInitialize()
-        devices = AudioUtilities.GetSpeakers()
-        interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
-        self.volume_control = cast(interface, POINTER(IAudioEndpointVolume))
-        
-        # Initialize volume level (0 to 100)
-        self.volume = 50
-        self.set_system_volume(self.volume)
+        self.current_os = platform.system()
+        self.volume_control = None
+        self.volume = 40
 
+        if self.current_os == "Windows":
+            from ctypes import cast, POINTER
+            import pythoncom
+            from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
+            from comtypes import CLSCTX_ALL
+            
+            pythoncom.CoInitialize()
+            devices = AudioUtilities.GetSpeakers()
+            interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
+            self.volume_control = cast(interface, POINTER(IAudioEndpointVolume))
+                          
     def set_system_volume(self, volume):
         # Set volume level (0.0 to 1.0)
-        self.volume_control.SetMasterVolumeLevelScalar(volume / 100.0, None)
+        if self.current_os == "Windows":
+            self.volume_control.SetMasterVolumeLevelScalar(volume / 100.0, None)
+        elif self.current_os == "Darwin":  # macOS
+            os.system(f"osascript -e 'set volume output volume {volume}'")
+        elif self.current_os == "Linux":  # Linux (requires `amixer`)
+            os.system(f"amixer -D pulse sset Master {volume}%")
 
     def recv(self, frame):
         # Convert frame to BGR image (OpenCV format)
@@ -74,11 +83,11 @@ class HandRecognitionProcessor(VideoProcessorBase):
                     normalized_distance = 0
 
                 min_distance, max_distance = 0.2, 1.4
-                if normalized_distance > 1.4 or normalized_distance < 0.2:
+                if normalized_distance > max_distance or normalized_distance < min_distance:
                     points_color = (0, 255, 0)        
 
                     # Adjust volume
-                    if normalized_distance < 0.2:
+                    if normalized_distance < min_distance:
                         self.volume = max(0, self.volume - 1)
                     else:
                         self.volume = min(100, self.volume + 1)
