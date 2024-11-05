@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-import home, movie_recommender, detection, contact, gaze_tracking, image_classification, nlp_tools
+import home, movie_recommender, detection, contact, gaze_tracking, image_classification, nlp_tools, gesture_recognition
 
 st.set_page_config(
         page_title="ML Website",
@@ -44,8 +44,8 @@ class MultiApp:
         with st.sidebar:        
             app = option_menu(
                 menu_title='Machine Learning ',
-                options=['Home', 'Gaze Tracking','Movie Recommender', 'Detection', 'Image Classification', 'NLP Tools','Contact'],
-                icons=['house-fill', 'eye', 'film','person-circle', 'camera2', 'card-text', 'telephone'],
+                options=['Home', 'Gaze Tracking','Movie Recommender', 'Detection', 'Image Classification', 'NLP Tools', 'Gesture recognition','Contact'],
+                icons=['house-fill', 'eye', 'film','person-circle', 'camera2', 'card-text', 'person-raised-hand', 'telephone'],
                 menu_icon='robot',
                 default_index=0,
                 styles={
@@ -71,7 +71,9 @@ class MultiApp:
         if app == "Movie Recommender":
             movie_recommender.app()  
         if app == "NLP Tools":
-            nlp_tools.app()                  
+            nlp_tools.app() 
+        if app == "Gesture recognition":
+            gesture_recognition.app()                  
           
              
     run()            
