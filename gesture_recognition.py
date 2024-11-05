@@ -37,5 +37,8 @@ def app():
             key="video-feed",
             mode=WebRtcMode.SENDRECV,
             media_stream_constraints={"video": True, "audio": False},
+            rtc_configuration={  # Add this config
+                "iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]
+            }
         )
 
