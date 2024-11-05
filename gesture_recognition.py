@@ -9,7 +9,7 @@ def app():
     st.title("✋ Gesture Recognition")
 
     # Create tabs
-    tabs = st.tabs(["🔊 Volume Control"])
+    tabs = st.tabs(["🔊 Volume Control"," Video Feed"])
 
     # Human Detector Tab
     with tabs[0]:
@@ -25,6 +25,17 @@ def app():
             key="hand-recognition",
             mode=WebRtcMode.SENDRECV,
             video_processor_factory=HandRecognitionProcessor,
+            media_stream_constraints={"video": True, "audio": False},
+        )
+
+    # Video Feed Tab
+    with tabs[1]:
+        st.write("This tab shows the video feed from your camera.")
+
+        # Set up the webcam feed without any processing
+        webrtc_streamer(
+            key="video-feed",
+            mode=WebRtcMode.SENDRECV,
             media_stream_constraints={"video": True, "audio": False},
         )
 
