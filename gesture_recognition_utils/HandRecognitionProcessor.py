@@ -16,6 +16,7 @@ mp_drawing = mp.solutions.drawing_utils
 class HandRecognitionProcessor(VideoProcessorBase):
     def __init__(self):
         # Initialize audio interface once
+        st.write(f"Here before")
         self.current_os = platform.system()
         self.volume_control = None
         self.volume = 40
