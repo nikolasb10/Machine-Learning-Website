@@ -41,8 +41,6 @@ def train_own_detector():
         st.session_state.current_step = 1  # Start at step 1
     if 'image_index' not in st.session_state:
         st.session_state.image_index = 0
-    if 'bounding_boxes' not in st.session_state:
-        st.session_state.bounding_boxes = []
     if 'yolo_bounding_boxes' not in st.session_state:
         st.session_state.yolo_bounding_boxes = []
     if 'uploaded_files' not in st.session_state:
