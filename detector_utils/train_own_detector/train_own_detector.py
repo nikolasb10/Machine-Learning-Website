@@ -2,6 +2,7 @@ import streamlit as st
 from general_utils.custom_write import custom_write
 import streamlit as st
 from detector_utils.train_own_detector.annotate_step import annotate_step
+from detector_utils.train_own_detector.annotate_step_deployed import annotate_step
 from detector_utils.train_own_detector.create_dataset_step import create_dataset_step
 from detector_utils.train_own_detector.load_images_step import load_images_step
 from detector_utils.train_own_detector.train_step import train_step
