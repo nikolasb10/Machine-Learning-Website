@@ -1,7 +1,11 @@
 import streamlit as st
 from PIL import Image, ImageDraw
 import pandas as pd
-
+from general_utils.custom_write import custom_write
+import streamlit as st
+import shutil
+import os
+from detector_utils.train_own_detector.create_dataset_step import create_train_and_test_sets
 ### Helper Functions
 
 def next_button_clicked():
@@ -50,9 +54,31 @@ def add_axis_labels(img):
     
     return img_with_axis
 
+def load_existing_annotations():
+    st.session_state.current_step = 4
+    source_folder      = "./detector_utils/train_own_detector/own_detector_dataset/labels_wheelchair"
+    destination_folder = "./detector_utils/train_own_detector/own_detector_dataset/labels"
+
+    # Loop through all files in the source folder
+    for filename in os.listdir(source_folder):
+        source_file = os.path.join(source_folder, filename)
+        destination_file = os.path.join(destination_folder, filename)
+        
+        # Only copy files (not subdirectories)
+        if os.path.isfile(source_file):
+            # Copy the file to the destination folder, replacing if it already exists
+            shutil.copy2(source_file, destination_file)
+
+    create_train_and_test_sets(base_dir="./detector_utils/train_own_detector/own_detector_dataset")
+
 def annotate_step():
-    st.write("Annotate images with bounding boxes")
+    custom_write("Step 2: Annotate images with bounding boxes",20)
     uploaded_files = st.session_state.uploaded_files
+
+    if st.session_state.demo_dataset_loaded:
+        custom_write("With the wheelchair dataset you can load the existing annotations if you like!")
+
+        st.button("Load existing annotations", on_click=load_existing_annotations)
 
     if uploaded_files:
         # Initialize bounding boxes state if not already set
