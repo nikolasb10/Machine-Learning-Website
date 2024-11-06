@@ -42,7 +42,7 @@ class HandRecognitionProcessor(VideoProcessorBase):
 
     def recv(self, frame):
         # Convert frame to BGR image (OpenCV format)
-        img = frame.to_ndarray(format="bgr24")
+        img = cv2.flip(frame.to_ndarray(format="bgr24"), 1)  # Flip horizontally
         
         # Process the image and detect hands
         img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
