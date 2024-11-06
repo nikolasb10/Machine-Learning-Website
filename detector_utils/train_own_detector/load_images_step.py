@@ -23,6 +23,7 @@ def clear_dataset():
     st.session_state.yolo_bounding_boxes  = []
     st.session_state.image_index          = 0
     st.session_state.own_detector_trained = False
+    st.session_state.demo_dataset_loaded  = False
 
 def use_wheelchair_dataset(images_folder):
     # Load wheelchair dataset images into st.session_state.uploaded_files
