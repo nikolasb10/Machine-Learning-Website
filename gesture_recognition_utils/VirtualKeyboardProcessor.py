@@ -21,7 +21,7 @@ class VirtualKeyboardProcessor:
         self.typed_text = deque(maxlen=30)  # Store last typed characters
 
     def recv(self, frame):
-        img = frame.to_ndarray(format="bgr24")
+        img = cv2.flip(frame.to_ndarray(format="bgr24"), 1)  # Flip horizontally
         h, w, _ = img.shape
         
         # Detect hands
