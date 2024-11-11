@@ -2,13 +2,14 @@ import streamlit as st
 from streamlit_webrtc import webrtc_streamer, WebRtcMode
 from gesture_recognition_utils.HandRecognitionProcessor import HandRecognitionProcessor
 from gesture_recognition_utils.VirtualKeyboardProcessor import VirtualKeyboardProcessor
+from gesture_recognition_utils.train_sign_detector.train_sign_detector import train_sign_detector
 from general_utils.custom_write import custom_write
 
 def app():
     st.title("✋ Gesture Recognition")
 
     # Create tabs
-    tabs = st.tabs(["⌨️ Virtual Keyboard", "🔊 Volume Control"])
+    tabs = st.tabs(["⌨️ Virtual Keyboard", "🔊 Volume Control", "👌 Train sign detector"])
 
     # Virtual Keyboard Tab
     with tabs[0]:
@@ -45,5 +46,9 @@ def app():
                 "iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]
             }
         )
+
+    # Train sign detector tab
+    with tabs[2]:
+        train_sign_detector()
         
 
