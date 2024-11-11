@@ -11,8 +11,6 @@ mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 hands = mp_hands.Hands(static_image_mode=True, min_detection_confidence=0.3)
 
-# Define label dictionary
-
 class InferenceClassifierProcessor(VideoProcessorBase):
     def __init__(self, model_path, labels_dict):
         self.x_ = []
@@ -21,7 +19,6 @@ class InferenceClassifierProcessor(VideoProcessorBase):
         self.labels_dict = labels_dict
 
         # Load the model
-        print(model_path)
         model_dict = pickle.load(open(model_path, 'rb'))
         self.model = model_dict['model']
 
