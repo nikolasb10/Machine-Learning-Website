@@ -12,15 +12,16 @@ mp_drawing_styles = mp.solutions.drawing_styles
 hands = mp_hands.Hands(static_image_mode=True, min_detection_confidence=0.3)
 
 # Define label dictionary
-labels_dict = {0: 'Up', 1: 'Left', 2: 'Right', 3: 'Down'}
 
 class InferenceClassifierProcessor(VideoProcessorBase):
-    def __init__(self, model_path):
+    def __init__(self, model_path, labels_dict):
         self.x_ = []
         self.y_ = []
         self.data_aux = []
+        self.labels_dict = labels_dict
 
         # Load the model
+        print(model_path)
         model_dict = pickle.load(open(model_path, 'rb'))
         self.model = model_dict['model']
 
@@ -75,7 +76,7 @@ class InferenceClassifierProcessor(VideoProcessorBase):
             if len(self.data_aux) == 42:
                 # Model prediction
                 prediction = self.model.predict([np.asarray(self.data_aux)])
-                predicted_character = labels_dict[int(prediction[0])]
+                predicted_character = self.labels_dict[int(prediction[0])]
 
                 # Draw bounding box and predicted text on the image
                 cv2.rectangle(img, (x1, y1), (x2, y2), (0, 0, 0), 4)

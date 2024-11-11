@@ -16,11 +16,11 @@ def inference_detector():
     if st.session_state.demo_dataset_loaded or os.path.isfile(f"{st.session_state.data_dir}/model.p"):
         if st.session_state.demo_dataset_loaded:
             model_path = f"./gesture_recognition_utils/train_sign_detector/demo_data/model.p"
-
+        print(st.session_state.labels_dict)
         webrtc_streamer(
             key="inference_classifier",
             mode=WebRtcMode.SENDRECV,
-            video_processor_factory=partial(InferenceClassifierProcessor, model_path),
+            video_processor_factory=partial(InferenceClassifierProcessor, model_path, st.session_state.labels_dict),
             media_stream_constraints={"video": True, "audio": False},
             rtc_configuration={  # Add this config
                 "iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]

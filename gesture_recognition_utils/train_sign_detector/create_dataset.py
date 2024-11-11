@@ -5,6 +5,7 @@ import cv2
 import streamlit as st
 from general_utils.custom_write import custom_write
 import os
+import shutil
 
 def check_folder_structure(base_path, num_folders, num_images_per_folder):
     """
@@ -73,6 +74,9 @@ def create_dataset_proc(hands):
 
                     data.append(data_aux)
                     labels.append(dir_)
+                    
+            # Delete the directory after processing
+            shutil.rmtree(dir_path)
 
     if len(data) > 0:
         f = open(f'{st.session_state.data_dir}/data.pickle', 'wb')

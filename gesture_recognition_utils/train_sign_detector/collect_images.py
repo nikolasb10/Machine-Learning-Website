@@ -11,10 +11,12 @@ def start_class_capture(class_index):
 def use_demo_dataset():
     st.session_state.demo_dataset_loaded = True
     st.session_state.dataset_created     = True
+    st.session_state.labels_dict         = {0: 'Up', 1: 'Left', 2: 'Right', 3: 'Down'}
 
 def clear_dataset():
     st.session_state.demo_dataset_loaded = False
     st.session_state.dataset_created     = True
+    st.session_state.labels_dict         = {0: 'Class 0', 1: 'Class 1', 2: 'Class 2', 3: 'Class 3', 4: 'Class 4', 5: 'Class 5'}
 
 def collect_images():
     if "data_dir" not in st.session_state:
@@ -27,6 +29,8 @@ def collect_images():
         st.session_state.number_of_classes = 2
     if "processor" not in st.session_state:
         st.session_state.processor = None
+    if "labels_dict" not in st.session_state:
+        st.session_state.labels_dict = {0: 'Class 0', 1: 'Class 1', 2: 'Class 2', 3: 'Class 3', 4: 'Class 4', 5: 'Class 5'}
 
     custom_write("Step 1: Collect images that will be used for training.", 20)
     st.markdown("""
@@ -49,7 +53,7 @@ def collect_images():
 
         number_of_classes = st.selectbox(
             "Choose how many gestures the model is going to be trained on:",
-            [i + 2 for i in range(9)]
+            [i + 2 for i in range(5)]
         )
         st.session_state.number_of_classes = number_of_classes
 
@@ -60,7 +64,8 @@ def collect_images():
 
         columns = st.columns(number_of_classes)
         for class_index in range(number_of_classes):
-            with columns[class_index]:
+            with columns[class_index]:        
+                # Start capturing button
                 st.button(f"Start Capturing for Class {class_index}", on_click=start_class_capture, args=(class_index,))
 
         # Set up the webcam feed with image collection
