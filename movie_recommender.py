@@ -2,6 +2,23 @@ import streamlit as st
 import requests
 from movie_recommender_utils.get_df_data import get_df_data
 from movie_recommender_utils.get_recommendations import get_recommendations
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+def display_similarity_heatmap(cosine_sim):
+    # Set up a matplotlib figure
+    fig, ax = plt.subplots(figsize=(8, 6))
+    
+    # Create a heatmap using Seaborn
+    sns.heatmap(cosine_sim[:15, :15], cmap="YlGnBu", ax=ax)  # Show a subset for readability
+
+    # Add labels and title
+    ax.set_title("Cosine Similarity between Movies")
+    ax.set_xlabel("Movie Index")
+    ax.set_ylabel("Movie Index")
+    
+    # Display the figure in Streamlit
+    st.pyplot(fig)
 
 def get_movie_poster(movie_name, api_key):
     # TMDb API endpoint for movie search
@@ -12,6 +29,8 @@ def get_movie_poster(movie_name, api_key):
     if 'results' in data and len(data['results']) > 0:
         # Get the first movie result
         movie = data['results'][0]
+        print(movie)
+
         poster_path = movie.get('poster_path', '')
         
         if poster_path:
@@ -30,6 +49,8 @@ def app():
     st.write("Find movies tailored to your tastes and preferences!")
 
     df, indices, cosine_sim = get_df_data()
+    # st.title("Cosine Similarity Heatmap")
+    # display_similarity_heatmap(cosine_sim)
 
     # Sample data (e.g., list of movies, names, etc.)
     movies = df["movie_title"].unique()
@@ -45,7 +66,7 @@ def app():
         recommendations = get_recommendations(df, indices, selected_movie, cosine_sim)
 
         # Display each recommended movie in a visually appealing way
-        for idx, row in recommendations.iterrows():
+        for _ , row in recommendations.iterrows():
             # Create a container for each movie
             with st.container():
                 # Create a two-column layout for each movie
@@ -62,7 +83,6 @@ def app():
                         st.image(poster_url)
                     else:
                         st.image('./movie_image.jpg', width=100)  # Replace with the correct path or image URL
-
 
                 # Display movie details in the second column
                 with col2:
