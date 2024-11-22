@@ -1,7 +1,8 @@
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-import os
+import streamlit as st
+
 # Function that creates a string consisted of specific columns for the row given
 def create_soup(x):
     return ' '.join(x['plot_keywords']) + ' ' + x['actor_1_name'] + ' ' + x['actor_2_name'] + ' ' + x['actor_3_name'] + ' ' + x['director_name'] + ' ' + ' '.join(x['genres']) #+ ' ' + x['country']
@@ -19,7 +20,8 @@ def clean_data(x):
             return str.lower(x.replace(" ", ""))
         else:
             return ''
-        
+
+@st.cache_data
 def get_df_data():
     # Read the CSV file into a DataFrame
     file_path = './movie_recommender_utils/movies_metadata.csv' 

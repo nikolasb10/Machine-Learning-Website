@@ -72,7 +72,7 @@ def PCA_reduction():
 
     # Set layout for the plot
     fig.update_layout(
-        title="PCA Reduction to 3 Dimensions",
+        title="PCA Reduction in 3 Dimensions",
         scene=dict(
             xaxis_title="X-axis",
             yaxis_title="Y-axis",
